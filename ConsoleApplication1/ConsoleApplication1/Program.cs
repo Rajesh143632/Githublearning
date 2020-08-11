@@ -68,16 +68,46 @@ namespace ConsoleApplication1
                 Console.WriteLine("year is not leap year");
             }
             Console.ReadLine();
+      
 
-            //. Write a program in C to display n terms of natural number and their sum.
+            // Write a program in C to display n terms of natural number and their sum.
+              // For LOOP
 
             int Naturalnumbers;
             Console.Write("Enter natural number:");
             Naturalnumbers = Convert.ToInt32(Console.ReadLine());
-            for (int i = 1; i <= Naturalnumbers; i++)
+            for (int i= 1; i <= Naturalnumbers; i++)
             {
                 Console.WriteLine(i);
             }
+
+          //  while loop
+
+            int i = 10;
+            while (i <= 20)
+            {
+                Console.WriteLine(i);
+                i++;
+            }
+
+         //   Do While
+            int a = 10;
+            do
+            {
+                Console.WriteLine(a);
+                a = a + 1;
+            } while (a < 20);
+
+          //  Write a program in C to display the cube of the number upto given an integer.
+
+            int ctr;
+            Console.Write("Enter number:");
+           ctr = Convert.ToInt32(Console.ReadLine());
+            for(i=1;i<=ctr;i++)
+            {
+                Console.WriteLine(i*i*i);
+            }
+            
         }
     }
 }

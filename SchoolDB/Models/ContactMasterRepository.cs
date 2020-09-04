@@ -11,7 +11,7 @@ namespace SchoolDB.Models
     {
         public List<ContactMaster> GetAll()
         {
-            ContactMaster contactMaster = null;
+          
             SqlConnection con = new SqlConnection("Data Source=DESKTOP-3LQJUUD;Initial Catalog=SchoolDB;User ID=sa;Password=123");
             string query = "Select * from dbo.ContactMaster";
             SqlCommand cmd = new SqlCommand(query, con);
@@ -20,12 +20,15 @@ namespace SchoolDB.Models
             SqlDataReader dr = cmd.ExecuteReader();
             while (dr.Read())
             {
-                int Id = (int)dr[0];
-                string ContactDetails = dr[1].ToString();
-                int PhoneNumber = (int)dr[2];
-                int MobileNumber = (int)dr[3];
-                int CreatedBy = (int)dr[4];
-                contactMasters.Add(contactMaster);
+                ContactMaster contact = new ContactMaster()
+                {
+                    Id = (int)dr[0],
+                    ContactDetails = dr[1].ToString(),
+                    PhoneNumber = (int)dr[2],
+                    MobileNumber = (int)dr[3],
+                    CreatedBy = (int)dr[4],
+                };
+                contactMasters.Add(contact);
             }
             con.Close();
             return contactMasters;

@@ -11,24 +11,28 @@ namespace SchoolDB.Models
     {
             public List<SchoolDetails> GetAll()
             {
-                SchoolDetails schoolDetails = null;
+              
                 SqlConnection con = new SqlConnection("Data Source=DESKTOP-3LQJUUD;Initial Catalog=SchoolDB;User ID=sa;Password=123");
                 string query = "Select * from dbo.SchoolDetails";
                 SqlCommand cmd = new SqlCommand(query, con);
                 con.Open();
                 List<SchoolDetails> schools = new List<SchoolDetails>();
                 SqlDataReader dr = cmd.ExecuteReader();
-                while (dr.Read())
+            while (dr.Read())
+            {
+                SchoolDetails schoolDetails = new SchoolDetails()
                 {
-                    int Id = (int)dr[0];
-                    string SchoolName = dr[1].ToString();
-                    int SchoolTypeId = (int)dr[2];
-                     DateTime CreatedDateTime = (DateTime)dr[3];
-                    string SchoolAddress = dr[4].ToString();
-                    string City = dr[5].ToString();
-                    string State = dr[6].ToString();
-                    string Country = dr[7].ToString();           
-                   int CreatedBy = (int)dr[8];
+                     Id = (int)dr[0],
+                     SchoolName = dr[1].ToString(),
+                     SchoolTypeId = (int)dr[2],
+                       CreatedDateTime = (DateTime)dr[3],
+                       IsActive = (bool)dr[4],
+                       SchoolAddress = dr[5].ToString(),
+                        City = dr[6].ToString(),
+                       State = dr[7].ToString(),
+                     Country = dr[8].ToString(),
+               CreatedBy = (int)dr[9],
+            };
                     schools.Add(schoolDetails);
                 }
                 con.Close();
@@ -52,11 +56,12 @@ namespace SchoolDB.Models
                        SchoolName = dr[1].ToString(),
                        SchoolTypeId = (int)dr[2],
                        CreatedDateTime = (DateTime)dr[3],
-                      SchoolAddress = dr[4].ToString(),
-                        City = dr[5].ToString(),
-                         State = dr[6].ToString(),
-                           Country = dr[7].ToString(),
-                        CreatedBy = (int)dr[8]
+                       IsActive = (bool)dr[4],
+                      SchoolAddress = dr[5].ToString(),
+                        City = dr[6].ToString(),
+                         State = dr[7].ToString(),
+                           Country = dr[8].ToString(),
+                        CreatedBy = (int)dr[9]
 
             };
                     con.Close();

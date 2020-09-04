@@ -11,7 +11,7 @@ namespace SchoolDB.Models
     {
         public List<SchoolTypeMaster> GetAll()
         {
-            SchoolTypeMaster schoolTypeMaster = null;
+          
             SqlConnection con = new SqlConnection("Data Source=DESKTOP-3LQJUUD;Initial Catalog=SchoolDB;User ID=sa;Password=123");
             string query = "Select * from dbo.SchoolTypeMaster";
             SqlCommand cmd = new SqlCommand(query, con);
@@ -20,10 +20,14 @@ namespace SchoolDB.Models
             SqlDataReader dr = cmd.ExecuteReader();
             while (dr.Read())
             {
-                int Id = (int)dr[0];
-                string SchoolTypeName = dr[1].ToString();
-                DateTime CreatedDateTime = (DateTime)dr[2];
-                int CreatedBy = (int)dr[3];
+                SchoolTypeMaster schoolTypeMaster = new SchoolTypeMaster()
+                {
+                      Id = (int)dr[0],
+                        SchoolTypeName = dr[1].ToString(),
+                        IsActive = (bool)dr[2],
+                      CreatedDateTime = (DateTime)dr[3],
+                     CreatedBy = (int)dr[4],
+            };
                 schoolTypes.Add(schoolTypeMaster);
             }
             con.Close();
@@ -45,8 +49,9 @@ namespace SchoolDB.Models
                 {
                    Id = (int)dr[0],
                    SchoolTypeName = dr[1].ToString(),
-                   CreatedDateTime = (DateTime)dr[2],
-                 CreatedBy = (int)dr[3]
+                   IsActive = (bool)dr[2],
+                   CreatedDateTime = (DateTime)dr[3],
+                 CreatedBy = (int)dr[4]
 
             };
                 con.Close();

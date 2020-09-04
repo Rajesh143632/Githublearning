@@ -11,7 +11,7 @@ namespace SchoolDB.Models
     {
         public List<PrincipalDetails> GetAll()
         {
-            PrincipalDetails principalDetails = null;
+  
             SqlConnection con = new SqlConnection("Data Source=DESKTOP-3LQJUUD;Initial Catalog=SchoolDB;User ID=sa;Password=123");
             string query = "Select * from dbo.PrincipalDetails";
             SqlCommand cmd = new SqlCommand(query, con);
@@ -20,19 +20,23 @@ namespace SchoolDB.Models
             SqlDataReader dr = cmd.ExecuteReader();
             while (dr.Read())
             {
-                int Id = (int)dr[0];
-                string PrincipalName = dr[1].ToString();
-                int SchoolId = (int)dr[2];
-                string Address = dr[3].ToString();
-                int Salary = (int)dr[4];
-                int ContactId = (int)dr[5];
-                int Age = (int)dr[6];
-                string Gender = dr[7].ToString();
-                string City = dr[8].ToString();
-                string State = dr[9].ToString();
-                string Country = dr[10].ToString();
-                DateTime CreatedDateTime = (DateTime)dr[11];
-                int CreatedBy = (int)dr[12];
+                PrincipalDetails principalDetails = new PrincipalDetails()
+                {
+                 Id = (int)dr[0],
+                PrincipalName = dr[1].ToString(),
+                   SchoolId = (int)dr[2],
+                  Address = dr[3].ToString(),
+                  Salary = (int)dr[4],
+                  ContactId = (int)dr[5],
+                     Age = (int)dr[6],
+                      Gender = dr[7].ToString(),
+                      City = dr[8].ToString(),
+                      State = dr[9].ToString(),
+                         Country = dr[10].ToString(),
+                         IsActive = (bool)dr[11],
+                     CreatedDateTime = (DateTime)dr[12],
+                 CreatedBy = (int)dr[13],
+            };
                 principals.Add(principalDetails);
             }
             con.Close();
@@ -63,8 +67,9 @@ namespace SchoolDB.Models
                     City = dr[8].ToString(),
                     State = dr[9].ToString(),
                     Country = dr[10].ToString(),
-                    CreatedDateTime = (DateTime)dr[11],
-                    CreatedBy = (int)dr[12],
+                    IsActive = (bool)dr[11],
+                    CreatedDateTime = (DateTime)dr[12],
+                    CreatedBy = (int)dr[13],
 
                 };
                 con.Close();

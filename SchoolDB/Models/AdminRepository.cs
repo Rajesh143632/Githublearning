@@ -11,7 +11,7 @@ namespace SchoolDB.Models
     {
         public List<Admin> GetAll()
         {
-            Admin a = null;
+            
             SqlConnection con = new SqlConnection("Data Source=DESKTOP-3LQJUUD;Initial Catalog=SchoolDB;User ID=sa;Password=123");
             string query = "Select * from dbo.Admin";
             SqlCommand cmd = new SqlCommand(query, con);
@@ -20,13 +20,16 @@ namespace SchoolDB.Models
             SqlDataReader dr = cmd.ExecuteReader();
             while (dr.Read())
             {
-                int Id = (int)dr[0];
-                int SchoolTypeId = (int)dr[1];
-                string UserName = dr[2].ToString();
-                int Password = (int)dr[3];
-                int PhoneNumber = (int)dr[4];
-                string Address = dr[5].ToString();
-                admins.Add(a);
+                Admin admin = new Admin()
+                {
+                    Id = (int)dr[0],
+                    SchoolTypeId = (int)dr[1],
+                    UserName = dr[2].ToString(),
+                    Password = (int)dr[3],
+                    PhoneNumber = (int)dr[4],
+                    Address = dr[5].ToString(),
+            };
+                admins.Add(admin);
             }
             con.Close();
             return admins;

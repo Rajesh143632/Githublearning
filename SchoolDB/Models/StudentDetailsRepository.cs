@@ -11,7 +11,7 @@ namespace SchoolDB.Models
     {
         public List<StudentDetails> GetAll()
         {
-            StudentDetails studentDetails = null;
+         
             SqlConnection con = new SqlConnection("Data Source=DESKTOP-3LQJUUD;Initial Catalog=SchoolDB;User ID=sa;Password=123");
             string query = "Select * from dbo.SecurityStaffDetails";
             SqlCommand cmd = new SqlCommand(query, con);
@@ -20,21 +20,25 @@ namespace SchoolDB.Models
             SqlDataReader dr = cmd.ExecuteReader();
             while (dr.Read())
             {
-                int Id = (int)dr[0];
-                string StudentName = dr[1].ToString();
-                int SchoolId = (int)dr[2];
-                string Address = dr[3].ToString();
-                int Class = (int)dr[4];
-                int CreatedBy = (int)dr[5];
-                int Age = (int)dr[6];
-                string Gender = dr[7].ToString();
-                string City = dr[8].ToString();
-                string State = dr[9].ToString();
-                string Country = dr[10].ToString();
-                DateTime CreatedDateTime = (DateTime)dr[11];
-                string GurdianName = dr[12].ToString();
-                int ContactId = (int)dr[13];
-                int GurdianNumber = (int)dr[14];
+                StudentDetails studentDetails = new StudentDetails()
+                {
+                     Id = (int)dr[0],
+                    StudentName = dr[1].ToString(),
+                       SchoolId = (int)dr[2],
+                   Address = dr[3].ToString(),
+                    Class = (int)dr[4],
+                    CreatedBy = (int)dr[5],
+                        Age = (int)dr[6],
+                      Gender = dr[7].ToString(),
+                       City = dr[8].ToString(),
+                         State = dr[9].ToString(),
+                         Country = dr[10].ToString(),
+                          IsActive = (bool)dr[11],
+                       CreatedDateTime = (DateTime)dr[12],
+                   GurdianName = dr[13].ToString(),
+                   ContactId = (int)dr[14],
+                GurdianNumber = (int)dr[15],
+            };
                
                 students.Add(studentDetails);
             }
@@ -61,11 +65,12 @@ namespace SchoolDB.Models
                     Address = dr[3].ToString(),
                      Class = (int)dr[4],
                      CreatedBy = (int)dr[5],
-                     Age = (int)dr[7],
-                      Gender = dr[8].ToString(),
-                     City = dr[9].ToString(),
-                      State = dr[10].ToString(),
-                      Country = dr[11].ToString(),
+                     Age = (int)dr[6],
+                      Gender = dr[7].ToString(),
+                     City = dr[8].ToString(),
+                      State = dr[9].ToString(),
+                      Country = dr[10].ToString(),
+                      IsActive = (bool)dr[11],
                       CreatedDateTime = (DateTime)dr[12],
                        GurdianName = dr[13].ToString(),
                       ContactId = (int)dr[14],

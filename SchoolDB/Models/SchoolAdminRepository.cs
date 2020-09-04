@@ -11,22 +11,25 @@ namespace SchoolDB.Models
     {
             public List<SchoolAdmin> GetAll()
             {
-                SchoolAdmin school = null;
+                
                 SqlConnection con = new SqlConnection("Data Source=DESKTOP-3LQJUUD;Initial Catalog=SchoolDB;User ID=sa;Password=123");
                 string query = "Select * from dbo.SchoolAdmin";
                 SqlCommand cmd = new SqlCommand(query, con);
                 con.Open();
             List<SchoolAdmin> schoolAdmins = new List<SchoolAdmin>();
                 SqlDataReader dr = cmd.ExecuteReader();
-                while (dr.Read())
+            while (dr.Read())
+            {
+                SchoolAdmin school = new SchoolAdmin()
                 {
-                    int Id = (int)dr[0];
-                    int SchoolId = (int)dr[1];
-                    string SchoolName = dr[2].ToString();
-                    string UserName = dr[3].ToString();
-                    int Password = (int)dr[4];
-                    int PhoneNumber = (int)dr[5];
-                    string Address = dr[5].ToString();
+                   Id = (int)dr[0],
+                     SchoolId = (int)dr[1],
+                          SchoolName = dr[2].ToString(),
+                      UserName = dr[3].ToString(),
+                      Password = (int)dr[4],
+                       PhoneNumber = (int)dr[5],
+                 Address = dr[5].ToString(),
+            };
                     schoolAdmins.Add(school);
                 }
                 con.Close();
@@ -84,7 +87,7 @@ namespace SchoolDB.Models
             public bool Put(SchoolAdmin admin)
             {
                 SqlConnection con = new SqlConnection("Data Source=DESKTOP-3LQJUUD;Initial Catalog=SchoolDB;User ID=sa;Password=123");
-                string query = "Update dbo.SchoolAdmin Set SchoolId=@SchoolId,SchoolName=@SchoolName,UserName=@UserName,Password=@Password,PhoneNumber=@PhoneNumber,Address=@Address Where Id = @Id");
+                string query = ("Update dbo.SchoolAdmin Set SchoolId=@SchoolId,SchoolName=@SchoolName,UserName=@UserName,Password=@Password,PhoneNumber=@PhoneNumber,Address=@Address Where Id = @Id");
                 SqlCommand cmd = new SqlCommand(query, con);
             cmd.Parameters.AddWithValue("@Id", admin.Id);
             cmd.Parameters.AddWithValue("@SchoolId", admin.SchoolId);

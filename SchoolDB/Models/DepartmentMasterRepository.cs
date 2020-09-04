@@ -11,7 +11,7 @@ namespace SchoolDB.Models
     {
         public List<DepartmentMaster> GetAll()
         {
-            DepartmentMaster department = null;
+          
             SqlConnection con = new SqlConnection("Data Source=DESKTOP-3LQJUUD;Initial Catalog=SchoolDB;User ID=sa;Password=123");
             string query = "Select * from dbo.DepartmentMaster";
             SqlCommand cmd = new SqlCommand(query, con);
@@ -20,14 +20,18 @@ namespace SchoolDB.Models
             SqlDataReader dr = cmd.ExecuteReader();
             while (dr.Read())
             {
-                 int Id = (int)dr[0];
-                string DepartmentName = dr[1].ToString();
-                bool IsActive = (bool)dr[2];
-                DateTime CreatedDateTime = (DateTime)dr[3];
-                int CreatedBy = (int)dr[4];
-                departmentMasters.Add(department);
-             }
-            con.Close();
+                DepartmentMaster departmentMaster = new DepartmentMaster()
+                {
+                        Id = (int)dr[0],
+                         DepartmentName = dr[1].ToString(),
+                          IsActive = (bool)dr[2],
+                        CreatedDateTime = (DateTime)dr[3],
+                     CreatedBy = (int)dr[4],
+
+                };
+                departmentMasters.Add(departmentMaster);
+            }
+                con.Close();
             return departmentMasters;
         }
     
